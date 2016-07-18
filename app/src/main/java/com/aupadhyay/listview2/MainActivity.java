@@ -6,7 +6,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     ArrayList<PersonBean> arrayList;
     ListView listView;
@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         personAdapter = new PersonAdapter(this, R.layout.row_list, arrayList);
 
         listView.setAdapter(personAdapter);
+        
+        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -37,4 +39,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
     }
+    
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        PersonBean pb = arrayList.get(i);
+        Toast.makeText(this, pb.toString(), Toast.LENGTH_LONG).show();
+    }
+    
 }
